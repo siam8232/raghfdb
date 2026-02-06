@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মাদ্রাসাতুস সুফফা আল ইসলামিয়া | Madrasa Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Single File Application: CSS is embedded here -->
+    <style>
+        :root {
+            --primary-color: #0D47A1;
+            --secondary-color: #1976D2;
+            --accent-color: #FFC107;
+            --background-color: #f0f2f5;
+            --surface-color: #ffffff;
+            --text-color: #212121;
+            --text-muted-color: #616161;
+            --success-color: #4CAF50;
+            --error-color: #F44336;
+            --warning-color: #FF9800;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --font-family-en: 'Poppins', sans-serif;
+            --font-family-bn: 'Noto Sans Bengali', sans-serif;
+            --font-family-ar: 'Noto Kufi Arabic', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #1E88E5;
+            --secondary-color: #42A5F5;
+            --accent-color: #FFCA28;
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --text-muted-color: #9e9e9e;
+            --success-color: #66BB6A;
+            --error-color: #EF5350;
+            --warning-color: #FFA726;
+            --border-color: #424242;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html[lang="ar"] body {
+            font-family: var(--font-family-ar), var(--font-family-en);
+        }
+        html[lang="en"] body {
+            font-family: var(--font-family-en);
+        }
+        html[lang="bn"] body {
+            font-family: var(--font-family-bn), var(--font-family-en);
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+        
+        body.rtl {
+            direction: rtl;
+        }
+
+        /* ------------------------- */
+        /* LOGIN SCREEN STYLES       */
+        /* ------------------------- */
+        #login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #login-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            background-color: var(--surface-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .login-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .login-subtitle {
+            margin-bottom: 2rem;
+            color: var(--text-muted-color);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        body.rtl .input-group {
+            text-align: right;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .input-field, .select-field {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+        }
+        
+        .btn:active {
+            transform: scale(0.98);
+        }
+        
+        .btn-primary { background-color: var(--primary-color); color: #ffffff; }
+        .btn-primary:hover { background-color: #0b3a82; }
+        .btn-secondary { background-color: var(--secondary-color); color: #ffffff; }
+        .btn-danger { background-color: var(--error-color); color: #ffffff; }
+        .btn-success { background-color: var(--success-color); color: #ffffff; }
+
+        .error-message {
+            color: var(--error-color);
+            margin-top: 1rem;
+            display: none;
+        }
+        
+
+        /* ------------------------- */
+        /* MAIN APP LAYOUT           */
+        /* ------------------------- */
+        #app-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: var(--surface-color);
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+            transition: width 0.3s ease;
+        }
+        body.rtl .sidebar {
+            border-right: none;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .sidebar-header { text-align: center; margin-bottom: 2rem; }
+        .sidebar-logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 0.5rem; }
+        .sidebar-title { font-size: 1rem; font-weight: 600; }
+        .nav-menu { list-style: none; flex-grow: 1; }
+        
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            padding: 0.9rem 1rem;
+            text-decoration: none;
+            color: var(--text-muted-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .nav-item a:hover { background-color: var(--background-color); color: var(--text-color); }
+        .nav-item a.active { background-color: var(--primary-color); color: #ffffff; }
+        .nav-icon { margin-right: 1rem; width: 20px; height: 20px; }
+        body.rtl .nav-icon { margin-right: 0; margin-left: 1rem; }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .app-section { display: none; }
+        .app-section.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .page-header { margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
+        .page-title { font-size: 2rem; font-weight: 700; }
+
+        .card { background-color: var(--surface-color); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.5rem; }
+        .card-header { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color); }
+        .card-title { font-size: 1.25rem; font-weight: 600; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+        /* Dashboard specific */
+        .stat-card { display: flex; align-items: center; padding: 1.5rem; }
+        .stat-card-icon { font-size: 2.5rem; margin-right: 1.5rem; padding: 1rem; border-radius: 50%; color: #fff; }
+        body.rtl .stat-card-icon { margin-right: 0; margin-left: 1.5rem; }
+        .stat-card-info h3 { font-size: 1rem; color: var(--text-muted-color); font-weight: 500; }
+        .stat-card-info p { font-size: 1.75rem; font-weight: 700; }
+
+        .icon-income { background-color: var(--success-color); }
+        .icon-expense { background-color: var(--error-color); }
+        .icon-cash { background-color: var(--warning-color); }
+        .icon-balance { background-color: var(--primary-color); }
+        .icon-students { background-color: var(--accent-color); }
+        
+        /* Table Styles */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        body.rtl table { text-align: right; }
+        th, td { padding: 1rem; border-bottom: 1px solid var(--border-color); }
+        thead { background-color: var(--background-color); }
+        th { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted-color); }
+        tbody tr:hover { background-color: var(--background-color); }
+        .action-buttons button { margin: 0 0.25rem; padding: 0.4rem 0.6rem; font-size: 0.9rem; border: none; border-radius: 5px; cursor: pointer; }
+        .student-image-sm { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        
+        /* Form & Modal Styles */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-grid .full-width { grid-column: 1 / -1; }
+        .modal { position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; }
+        .modal-content { background-color: var(--surface-color); margin: auto; padding: 2rem; border-radius: var(--border-radius); width: 90%; max-width: 600px; position: relative; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+        .modal-title { font-size: 1.5rem; font-weight: 600; }
+        .close-button { color: var(--text-muted-color); font-size: 2rem; font-weight: bold; cursor: pointer; }
+
+        /* Student Search Result Style */
+        .student-search-card { display: flex; align-items: center; gap: 1.5rem; }
+        .student-image-lg { width: 100px; height: 100px; border-radius: var(--border-radius); object-fit: cover; border: 3px solid var(--border-color); }
+        
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 1rem; } .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; } .mb-2 { margin-bottom: 2rem; }
+        .d-flex { display: flex; } .justify-between { justify-content: space-between; } .align-center { align-items: center; }
+        .w-100 { width: 100%; }
+        
+    </style>
+</head>
+<body>
+
+    <!-- 
+    ======================================
+    LOGIN SCREEN
+    ======================================
+    -->
+    <div id="login-screen">
+        <div class="login-container">
+            <img src="https://i.ibb.co/5gYT2Z99/476160855-122102446826755617-3674873459737657297-n.jpg" alt="Madrasa Logo" class="login-logo">
+            <h1 class="login-title">মাদ্রাসাতুস সুফফা আল ইসলামিয়া</h1>
+            <p class="login-subtitle">Management Application</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="password" data-translate-key="passwordLabel">পাসওয়ার্ড দিন</label>
+                    <input type="password" id="password" class="input-field" required>
+                </div>
+                <button type="submit" class="btn btn-primary" data-translate-key="loginButton">প্রবেশ করুন</button>
+                <p id="login-error" class="error-message" data-translate-key="loginError">ভুল পাসওয়ার্ড!</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- 
+    ======================================
+    MAIN APPLICATION CONTAINER
+    ======================================
+    -->
+    <div id="app-container" style="visibility: hidden;">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="https://i.ibb.co/5gYT2Z99/476160855-122102446826755617-3674873459737657297-n.jpg" alt="Madrasa Logo" class="sidebar-logo">
+                <h2 class="sidebar-title">মাদ্রাসাতুস সুফফা</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#dashboard" class="nav-link active"><span class="nav-icon">📊</span> <span data-translate-key="navDashboard">ড্যাশবোর্ড</span></a></li>
+                <li class="nav-item"><a href="#students" class="nav-link"><span class="nav-icon">👨‍🎓</span> <span data-translate-key="navStudents">ছাত্র পরিচালনা</span></a></li>
+                <li class="nav-item"><a href="#fees" class="nav-link"><span class="nav-icon">💰</span> <span data-translate-key="navFees">মাসিক ফি</span></a></li>
+                <li class="nav-item"><a href="#expenses" class="nav-link"><span class="nav-icon">🏠</span> <span data-translate-key="navExpenses">লিল্লাহ বোর্ডিং খরচ</span></a></li>
+                <li class="nav-item"><a href="#donations" class="nav-link"><span class="nav-icon">🤲</span> <span data-translate-key="navDonations">দান / সাদকা</span></a></li>
+                <li class="nav-item"><a href="#settings" class="nav-link"><span class="nav-icon">⚙️</span> <span data-translate-key="navSettings">সেটিংস</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="app-section active">
+                <div class="page-header">
+                    <h1 class="page-title" data-translate-key="dashboardTitle">ড্যাশবোর্ড</h1>
+                </div>
+                <div class="grid-container">
+                    <div class="card stat-card">
+                        <div class="stat-card-icon icon-income">💰</div>
+                        <div class="stat-card-info">
+                            <h3 data-translate-key="totalIncome">সর্বমোট আয়</h3>
+                            <p id="total-income">৳০</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-card-icon icon-expense">💸</div>
+                        <div class="stat-card-info">
+                            <h3 data-translate-key="totalExpense">সর্বমোট ব্যয়</h3>
+                            <p id="total-expense">৳০</p>
+                        </div>
+                    </div>
+                     <!-- NEW: Cash Balance Card -->
+                    <div class="card stat-card">
+                        <div class="stat-card-icon icon-cash">🏦</div>
+                        <div class="stat-card-info">
+                            <h3 data-translate-key="cashBalance">বর্তমানে ক্যাশে আছে</h3>
+                            <p id="cash-balance">৳০</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                         <div class="stat-card-icon icon-balance">🗓️</div>
+                        <div class="stat-card-info">
+                            <h3 data-translate-key="monthlyIncome">চলতি মাসের আয়</h3>
+                            <p id="monthly-income">৳০</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-card-icon icon-balance">📅</div>
+                        <div class="stat-card-info">
+                            <h3 data-translate-key="yearlyIncome">চলতি বছরের আয়</h3>
+                            <p id="yearly-income">৳০</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-card-icon icon-students">👨‍🎓</div>
+                        <div class="stat-card-info">
+                            <h3 data-translate-key="totalStudents">মোট ছাত্র</h3>
+                            <p id="total-students">০</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-card-icon icon-students">🏠</div>
+                        <div class="stat-card-info">
+                            <h3 data-translate-key="lillahStudents">লিল্লাহ বোর্ডিং ছাত্র</h3>
+                            <p id="lillah-students">০</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STUDENTS -->
+            <section id="students" class="app-section">
+                <div class="page-header d-flex justify-between align-center">
+                    <h1 class="page-title" data-translate-key="studentsTitle">ছাত্র পরিচালনা</h1>
+                    <button class="btn btn-primary" id="add-student-btn" data-translate-key="addStudentBtn">নতুন ছাত্র যোগ করুন</button>
+                </div>
+                 <div class="card">
+                     <div class="card-header">
+                        <h3 class="card-title" data-translate-key="searchStudent">ছাত্র খুঁজুন</h3>
+                    </div>
+                     <div class="input-group">
+                        <label for="search-student-serial" data-translate-key="searchBySerial">সিরিয়াল নম্বর দ্বারা ছাত্র খুঁজুন</label>
+                        <input type="number" id="search-student-serial" class="input-field" data-translate-key-placeholder="enterSerialPlaceholder">
+                    </div>
+                    <div id="student-search-result"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" data-translate-key="allStudents">সকল ছাত্র</h3>
+                    </div>
+                    <div class="table-container">
+                        <table id="students-table">
+                            <thead>
+                                <tr>
+                                    <th data-translate-key="thSerial">সিরিয়াল</th>
+                                    <th data-translate-key="thImage">ছবি</th>
+                                    <th data-translate-key="thName">নাম</th>
+                                    <th data-translate-key="thFatherName">পিতার নাম</th>
+                                    <th data-translate-key="thDepartment">বিভাগ</th>
+                                    <th data-translate-key="thRoll">রোল</th>
+                                    <th data-translate-key="thResidence">আবাসন</th>
+                                    <th data-translate-key="thActions">পদক্ষেপ</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FEES -->
+            <section id="fees" class="app-section">
+                 <div class="page-header">
+                    <h1 class="page-title" data-translate-key="feesTitle">ছাত্রের মাসিক ফি</h1>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3 class="card-title" data-translate-key="feeCollection">ফি কালেকশন</h3></div>
+                    <div class="input-group">
+                        <label for="fee-student-search" data-translate-key="searchBySerial">সিরিয়াল নম্বর দ্বারা ছাত্র খুঁজুন</label>
+                        <input type="number" id="fee-student-search" class="input-field" data-translate-key-placeholder="enterSerialPlaceholder">
+                    </div>
+                    <div id="fee-student-info" style="display:none;">
+                        <h4 id="fee-student-name"></h4>
+                        <p><span data-translate-key="fatherNameLabel">পিতার নাম</span>: <span id="fee-father-name"></span></p>
+                        <p><span data-translate-key="monthlyFeeLabel">মাসিক ফি</span>: <span id="fee-monthly-amount"></span></p>
+                        <!-- DUE SYSTEM REMOVED -->
+                        <hr class="mt-1 mb-2">
+                        <div class="form-grid">
+                             <div class="input-group">
+                                <label for="fee-month" data-translate-key="selectMonth">মাস নির্বাচন করুন</label>
+                                <input type="month" id="fee-month" class="input-field">
+                            </div>
+                            <div class="input-group">
+                                <label for="fee-paid-amount" data-translate-key="paidAmount">প্রদত্ত পরিমাণ</label>
+                                <input type="number" id="fee-paid-amount" class="input-field" data-translate-key-placeholder="amountPlaceholder">
+                            </div>
+                        </div>
+                        <button id="save-fee-payment" class="btn btn-success mt-1" data-translate-key="savePaymentBtn">পেমেন্ট সংরক্ষণ করুন</button>
+                    </div>
+                    <div id="fee-payment-history" class="mt-2"></div>
+                </div>
+            </section>
+
+            <!-- EXPENSES -->
+            <section id="expenses" class="app-section">
+                <div class="page-header">
+                    <h1 class="page-title" data-translate-key="expensesTitle">লিল্লাহ বোর্ডিং খরচ</h1>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" data-translate-key="addExpense">নতুন খরচ যোগ করুন</h3>
+                    </div>
+                    <form id="expense-form" class="form-grid">
+                        <div class="input-group">
+                             <label for="expense-date" data-translate-key="date">তারিখ</label>
+                             <input type="date" id="expense-date" class="input-field" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="expense-amount" data-translate-key="expenseAmount">খরচের পরিমাণ</label>
+                            <input type="number" id="expense-amount" class="input-field" data-translate-key-placeholder="amountPlaceholder" required>
+                        </div>
+                        <div class="input-group full-width">
+                             <label for="expense-description" data-translate-key="description">বিবরণ</label>
+                             <input type="text" id="expense-description" class="input-field" data-translate-key-placeholder="descriptionPlaceholder" required>
+                        </div>
+                        <div class="full-width">
+                            <button type="submit" class="btn btn-primary" data-translate-key="saveExpenseBtn">খরচ সংরক্ষণ</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" data-translate-key="expenseRecords">খরচের হিসাব</h3>
+                    </div>
+                    <div class="table-container">
+                         <table id="expenses-table">
+                            <thead>
+                                <tr>
+                                    <th data-translate-key="thDate">তারিখ</th>
+                                    <th data-translate-key="thDescription">বিবরণ</th>
+                                    <th data-translate-key="thAmount">পরিমাণ (টাকা)</th>
+                                    <th data-translate-key="thActions">পদক্ষেপ</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DONATIONS -->
+            <section id="donations" class="app-section">
+                 <div class="page-header d-flex justify-between align-center">
+                    <h1 class="page-title" data-translate-key="donationsTitle">দান / সাদকা</h1>
+                    <button id="add-donation-btn" class="btn btn-primary" data-translate-key="addDonationBtn">নতুন দান যোগ করুন</button>
+                </div>
+                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" data-translate-key="allDonations">সকল দান</h3>
+                    </div>
+                    <div class="table-container">
+                        <table id="donations-table">
+                            <thead>
+                                <tr>
+                                    <th data-translate-key="thDate">তারিখ</th>
+                                    <th data-translate-key="thDonorName">দাতার নাম</th>
+                                    <th data-translate-key="thAmount">পরিমাণ</th>
+                                    <th data-translate-key="thDonationType">দানের প্রকার</th>
+                                    <th data-translate-key="thReceiptNo">রসিদ নম্বর</th>
+                                    <th data-translate-key="thActions">পদক্ষেপ</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SETTINGS -->
+            <section id="settings" class="app-section">
+                <div class="page-header">
+                    <h1 class="page-title" data-translate-key="settingsTitle">সেটিংস</h1>
+                </div>
+                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" data-translate-key="changePassword">পাসওয়ার্ড পরিবর্তন</h3>
+                    </div>
+                    <form id="change-password-form">
+                        <div class="input-group">
+                            <label for="current-password" data-translate-key="currentPassword">বর্তমান পাসওয়ার্ড</label>
+                            <input type="password" id="current-password" class="input-field" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="new-password" data-translate-key="newPassword">নতুন পাসওয়ার্ড</label>
+                            <input type="password" id="new-password" class="input-field" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" data-translate-key="changePasswordBtn">পাসওয়ার্ড পরিবর্তন করুন</button>
+                        <p id="password-change-status" class="mt-1"></p>
+                    </form>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" data-translate-key="theme">থিম</h3>
+                    </div>
+                    <div class="input-group">
+                        <label for="theme-selector" data-translate-key="selectTheme">অ্যাপ থিম নির্বাচন করুন</label>
+                        <select id="theme-selector" class="select-field">
+                            <option value="light" data-translate-key="lightMode">লাইট মোড</option>
+                            <option value="dark" data-translate-key="darkMode">ডার্ক মোড</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title" data-translate-key="language">ভাষা</h3>
+                    </div>
+                    <div class="input-group">
+                        <label for="language-selector" data-translate-key="selectLanguage">অ্যাপ ভাষা নির্বাচন করুন</label>
+                         <select id="language-selector" class="select-field">
+                            <option value="bn">Bengali (বাংলা)</option>
+                            <option value="en">English</option>
+                            <option value="ar">Arabic (العربية)</option>
+                        </select>
+                    </div>
+                    <p class="text-muted-color mt-1" data-translate-key="settingsInfoText">
+                        "You can change everything by going to the app's settings, such as running in dark mode or light mode, and changing the app's language, such as English, Bengali, and Arabic."
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODALS -->
+    <!-- Student Add/Edit Modal -->
+    <div id="student-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="student-modal-title" class="modal-title"></h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <form id="student-form">
+                <input type="hidden" id="student-id">
+                <div class="form-grid">
+                    <div class="input-group"><label for="student-name" data-translate-key="studentNameLabel">ছাত্রের নাম</label><input type="text" id="student-name" class="input-field" required></div>
+                    <div class="input-group"><label for="student-image-url" data-translate-key="imageUrlLabel">ছবির URL</label><input type="text" id="student-image-url" class="input-field"></div>
+                    <div class="input-group"><label for="father-name" data-translate-key="fatherNameLabel">পিতার নাম</label><input type="text" id="father-name" class="input-field" required></div>
+                    <div class="input-group"><label for="mother-name" data-translate-key="motherNameLabel">মাতার নাম</label><input type="text" id="mother-name" class="input-field" required></div>
+                    <div class="input-group full-width"><label for="address" data-translate-key="addressLabel">ঠিকানা</label><input type="text" id="address" class="input-field" required></div>
+                    <div class="input-group"><label for="department" data-translate-key="departmentLabel">বিভাগ</label><input type="text" id="department" class="input-field" required></div>
+                    <div class="input-group"><label for="roll" data-translate-key="rollLabel">রোল নম্বর</label><input type="number" id="roll" class="input-field" required></div>
+                    <div class="input-group"><label for="monthly-fee" data-translate-key="monthlyFeeLabel">মাসিক ফি</label><input type="number" id="monthly-fee" class="input-field" required></div>
+                    <div class="input-group">
+                        <label for="residence-type" data-translate-key="residenceTypeLabel">আবাসন প্রকার</label>
+                        <select id="residence-type" class="select-field">
+                            <option value="Residential" data-translate-key="residenceResidential">আবাসিক</option>
+                            <option value="Non-Residential" data-translate-key="residenceNonResidential">অনাবাসিক</option>
+                            <option value="Day Care" data-translate-key="residenceDayCare">ডে কেয়ার</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="lillah-boarding" data-translate-key="lillahBoardingLabel">লিল্লাহ বোর্ডিং</label>
+                        <select id="lillah-boarding" class="select-field">
+                            <option value="No" data-translate-key="no">না</option>
+                            <option value="Yes" data-translate-key="yes">হ্যাঁ</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-2"><button type="submit" class="btn btn-primary w-100" data-translate-key="saveBtn">সংরক্ষণ করুন</button></div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Donation Add/Edit Modal -->
+    <div id="donation-modal" class="modal">
+        <div class="modal-content">
+             <div class="modal-header">
+                <h2 id="donation-modal-title" class="modal-title"></h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <form id="donation-form">
+                <input type="hidden" id="donation-id">
+                 <div class="form-grid">
+                    <div class="input-group"><label for="donor-name" data-translate-key="donorNameLabel">দাতার নাম</label><input type="text" id="donor-name" class="input-field" required></div>
+                    <div class="input-group"><label for="donation-amount" data-translate-key="donationAmountLabel">দানের পরিমাণ</label><input type="number" id="donation-amount" class="input-field" required></div>
+                    <div class="input-group"><label for="donation-type" data-translate-key="donationTypeLabel">দানের প্রকার</label><input type="text" id="donation-type" class="input-field" data-translate-key-placeholder="donationTypePlaceholder" required></div>
+                    <div class="input-group"><label for="receiver-book" data-translate-key="receiverBookLabel">গ্রহীতা বইয়ের নাম</label><input type="text" id="receiver-book" class="input-field"></div>
+                    <div class="input-group"><label for="receipt-number" data-translate-key="receiptNoLabel">রসিদ নম্বর</label><input type="text" id="receipt-number" class="input-field"></div>
+                 </div>
+                 <div class="mt-2"><button type="submit" class="btn btn-primary w-100" data-translate-key="saveBtn">সংরক্ষণ করুন</button></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 
+    ======================================
+    JAVASCRIPT LOGIC
+    ======================================
+    -->
+    <script>
+    window.onload = function() {
+        'use strict';
+
+        // ===================================
+        // TRANSLATION DICTIONARY
+        // ===================================
+        const translations = {
+            bn: {
+                passwordLabel: 'পাসওয়ার্ড দিন', loginButton: 'প্রবেশ করুন', loginError: 'ভুল পাসওয়ার্ড!',
+                navDashboard: 'ড্যাশবোর্ড', navStudents: 'ছাত্র পরিচালনা', navFees: 'মাসিক ফি', navExpenses: 'লিল্লাহ বোর্ডিং খরচ', navDonations: 'দান / সাদকা', navSettings: 'সেটিংস',
+                dashboardTitle: 'ড্যাশবোর্ড', totalIncome: 'সর্বমোট আয়', totalExpense: 'সর্বমোট ব্যয়', cashBalance: 'বর্তমানে ক্যাশে আছে', monthlyIncome: 'চলতি মাসের আয়', yearlyIncome: 'চলতি বছরের আয়', totalStudents: 'মোট ছাত্র', lillahStudents: 'লিল্লাহ বোর্ডিং ছাত্র',
+                studentsTitle: 'ছাত্র পরিচালনা', addStudentBtn: 'নতুন ছাত্র যোগ করুন', searchStudent: 'ছাত্র খুঁজুন', searchBySerial: 'সিরিয়াল নম্বর দ্বারা ছাত্র খুঁজুন', enterSerialPlaceholder: 'সিরিয়াল নম্বর লিখুন...',
+                allStudents: 'সকল ছাত্র', thSerial: 'সিরিয়াল', thImage: 'ছবি', thName: 'নাম', thFatherName: 'পিতার নাম', thDepartment: 'বিভাগ', thRoll: 'রোল', thResidence: 'আবাসন', thActions: 'পদক্ষেপ', editBtn: 'সম্পাদনা', deleteBtn: 'মুছুন',
+                noStudentFound: 'কোনো ছাত্র পাওয়া যায়নি।', studentNotFoundWithSerial: 'এই সিরিয়ালে কোনো ছাত্র পাওয়া যায়নি।',
+                feesTitle: 'ছাত্রের মাসিক ফি', feeCollection: 'ফি কালেকশন', selectMonth: 'মাস নির্বাচন করুন', paidAmount: 'প্রদত্ত পরিমাণ', amountPlaceholder: 'টাকার পরিমাণ', savePaymentBtn: 'পেমেন্ট সংরক্ষণ করুন', paymentHistory: 'পেমেন্ট ইতিহাস', noPaymentFound: 'কোনো পেমেন্ট পাওয়া যায়নি।',
+                expensesTitle: 'লিল্লাহ বোর্ডিং খরচ', addExpense: 'নতুন খরচ যোগ করুন', date: 'তারিখ', expenseAmount: 'খরচের পরিমাণ', description: 'বিবরণ', descriptionPlaceholder: 'খরচের বিবরণ', saveExpenseBtn: 'খরচ সংরক্ষণ', expenseRecords: 'খরচের হিসাব', noExpenseFound: 'কোনো খরচ পাওয়া যায়নি।',
+                donationsTitle: 'দান / সাদকা', addDonationBtn: 'নতুন দান যোগ করুন', allDonations: 'সকল দান', thDonorName: 'দাতার নাম', thAmount: 'পরিমাণ', thDonationType: 'দানের প্রকার', thReceiptNo: 'রসিদ নম্বর', thDate: 'তারিখ', noDonationFound: 'কোনো দান পাওয়া যায়নি।',
+                settingsTitle: 'সেটিংস', changePassword: 'পাসওয়ার্ড পরিবর্তন', currentPassword: 'বর্তমান পাসওয়ার্ড', newPassword: 'নতুন পাসওয়ার্ড', changePasswordBtn: 'পাসওয়ার্ড পরিবর্তন করুন', passwordSuccess: 'পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে!', passwordError: 'বর্তমান পাসওয়ার্ড ভুল!',
+                theme: 'থিম', selectTheme: 'অ্যাপ থিম নির্বাচন করুন', lightMode: 'লাইট মোড', darkMode: 'ডার্ক মোড',
+                language: 'ভাষা', selectLanguage: 'অ্যাপ ভাষা নির্বাচন করুন', settingsInfoText: 'You can change everything by going to the app\'s settings, such as running in dark mode or light mode, and changing the app\'s language, such as English, Bengali, and Arabic.',
+                // Modal specific
+                addNewStudentTitle: 'নতুন ছাত্র যোগ করুন', updateStudentTitle: 'ছাত্রের তথ্য আপডেট করুন', studentNameLabel: 'ছাত্রের নাম', imageUrlLabel: 'ছবির URL', fatherNameLabel: 'পিতার নাম', motherNameLabel: 'মাতার নাম', addressLabel: 'ঠিকানা', departmentLabel: 'বিভাগ', rollLabel: 'রোল নম্বর', monthlyFeeLabel: 'মাসিক ফি', residenceTypeLabel: 'আবাসন প্রকার', residenceResidential: 'আবাসিক', residenceNonResidential: 'অনাবাসিক', residenceDayCare: 'ডে কেয়ার', lillahBoardingLabel: 'লিল্লাহ বোর্ডিং', no: 'না', yes: 'হ্যাঁ', saveBtn: 'সংরক্ষণ করুন',
+                addNewDonationTitle: 'নতুন দান যোগ করুন', updateDonationTitle: 'দানের তথ্য আপডেট করুন', donorNameLabel: 'দাতার নাম', donationAmountLabel: 'দানের পরিমাণ', donationTypeLabel: 'দানের প্রকার', donationTypePlaceholder: 'যেমন: সাধারণ, যাকাত', receiverBookLabel: 'গ্রহীতা বইয়ের নাম', receiptNoLabel: 'রসিদ নম্বর',
+            },
+            en: {
+                passwordLabel: 'Enter Password', loginButton: 'Login', loginError: 'Wrong Password!',
+                navDashboard: 'Dashboard', navStudents: 'Student Management', navFees: 'Monthly Fee', navExpenses: 'Lillah Boarding Expense', navDonations: 'Donation / Sadqa', navSettings: 'Settings',
+                dashboardTitle: 'Dashboard', totalIncome: 'Total Income', totalExpense: 'Total Expense', cashBalance: 'Current Cash Balance', monthlyIncome: 'This Month\'s Income', yearlyIncome: 'This Year\'s Income', totalStudents: 'Total Students', lillahStudents: 'Lillah Boarding Students',
+                studentsTitle: 'Student Management', addStudentBtn: 'Add New Student', searchStudent: 'Search Student', searchBySerial: 'Search Student by Serial Number', enterSerialPlaceholder: 'Enter serial number...',
+                allStudents: 'All Students', thSerial: 'Serial', thImage: 'Image', thName: 'Name', thFatherName: 'Father\'s Name', thDepartment: 'Department', thRoll: 'Roll', thResidence: 'Residence', thActions: 'Actions', editBtn: 'Edit', deleteBtn: 'Delete',
+                noStudentFound: 'No students found.', studentNotFoundWithSerial: 'No student found with this serial number.',
+                feesTitle: 'Student Monthly Fee', feeCollection: 'Fee Collection', selectMonth: 'Select Month', paidAmount: 'Paid Amount', amountPlaceholder: 'Enter amount', savePaymentBtn: 'Save Payment', paymentHistory: 'Payment History', noPaymentFound: 'No payments found.',
+                expensesTitle: 'Lillah Boarding Expense', addExpense: 'Add New Expense', date: 'Date', expenseAmount: 'Expense Amount', description: 'Description', descriptionPlaceholder: 'Expense description', saveExpenseBtn: 'Save Expense', expenseRecords: 'Expense Records', noExpenseFound: 'No expenses found.',
+                donationsTitle: 'Donation / Sadqa', addDonationBtn: 'Add New Donation', allDonations: 'All Donations', thDonorName: 'Donor Name', thAmount: 'Amount', thDonationType: 'Donation Type', thReceiptNo: 'Receipt No.', thDate: 'Date', noDonationFound: 'No donations found.',
+                settingsTitle: 'Settings', changePassword: 'Change Password', currentPassword: 'Current Password', newPassword: 'New Password', changePasswordBtn: 'Change Password', passwordSuccess: 'Password changed successfully!', passwordError: 'Incorrect current password!',
+                theme: 'Theme', selectTheme: 'Select App Theme', lightMode: 'Light Mode', darkMode: 'Dark Mode',
+                language: 'Language', selectLanguage: 'Select App Language', settingsInfoText: 'You can change everything by going to the app\'s settings, such as running in dark mode or light mode, and changing the app\'s language, such as English, Bengali, and Arabic.',
+                // Modal specific
+                addNewStudentTitle: 'Add New Student', updateStudentTitle: 'Update Student Info', studentNameLabel: 'Student Name', imageUrlLabel: 'Image URL', fatherNameLabel: 'Father\'s Name', motherNameLabel: 'Mother\'s Name', addressLabel: 'Address', departmentLabel: 'Department', rollLabel: 'Roll Number', monthlyFeeLabel: 'Monthly Fee', residenceTypeLabel: 'Residence Type', residenceResidential: 'Residential', residenceNonResidential: 'Non-Residential', residenceDayCare: 'Day Care', lillahBoardingLabel: 'Lillah Boarding', no: 'No', yes: 'Yes', saveBtn: 'Save',
+                addNewDonationTitle: 'Add New Donation', updateDonationTitle: 'Update Donation Info', donorNameLabel: 'Donor Name', donationAmountLabel: 'Donation Amount', donationTypeLabel: 'Donation Type', donationTypePlaceholder: 'e.g., General, Zakat', receiverBookLabel: 'Receiver Book Name', receiptNoLabel: 'Receipt Number',
+            },
+            ar: {
+                passwordLabel: 'أدخل كلمة المرور', loginButton: 'تسجيل الدخول', loginError: 'كلمة مرور خاطئة!',
+                navDashboard: 'لوحة التحكم', navStudents: 'إدارة الطلاب', navFees: 'الرسوم الشهرية', navExpenses: 'مصاريف السكن', navDonations: 'التبرعات / الصدقات', navSettings: 'الإعدادات',
+                dashboardTitle: 'لوحة التحكم', totalIncome: 'إجمالي الدخل', totalExpense: 'إجمالي المصروفات', cashBalance: 'الرصيد النقدي الحالي', monthlyIncome: 'دخل هذا الشهر', yearlyIncome: 'دخل هذا العام', totalStudents: 'إجمالي الطلاب', lillahStudents: 'طلاب السكن',
+                studentsTitle: 'إدارة الطلاب', addStudentBtn: 'إضافة طالب جديد', searchStudent: 'بحث عن طالب', searchBySerial: 'البحث بالرقم التسلسلي', enterSerialPlaceholder: 'أدخل الرقم التسلسلي...',
+                allStudents: 'كل الطلاب', thSerial: 'الرقم', thImage: 'الصورة', thName: 'الاسم', thFatherName: 'اسم الأب', thDepartment: 'القسم', thRoll: 'اللفة', thResidence: 'الإقامة', thActions: 'الإجراءات', editBtn: 'تعديل', deleteBtn: 'حذف',
+                noStudentFound: 'لم يتم العثور على طلاب.', studentNotFoundWithSerial: 'لم يتم العثور على طالب بهذا الرقم.',
+                feesTitle: 'الرسوم الشهرية للطالب', feeCollection: 'تحصيل الرسوم', selectMonth: 'اختر الشهر', paidAmount: 'المبلغ المدفوع', amountPlaceholder: 'أدخل المبلغ', savePaymentBtn: 'حفظ الدفع', paymentHistory: 'سجل المدفوعات', noPaymentFound: 'لا توجد مدفوعات.',
+                expensesTitle: 'مصاريف السكن', addExpense: 'إضافة مصروف جديد', date: 'التاريخ', expenseAmount: 'مبلغ المصروف', description: 'الوصف', descriptionPlaceholder: 'وصف المصروف', saveExpenseBtn: 'حفظ المصروف', expenseRecords: 'سجلات المصاريف', noExpenseFound: 'لا توجد مصاريف.',
+                donationsTitle: 'التبرعات / الصدقات', addDonationBtn: 'إضافة تبرع جديد', allDonations: 'جميع التبرعات', thDonorName: 'اسم المتبرع', thAmount: 'المبلغ', thDonationType: 'نوع التبرع', thReceiptNo: 'رقم الإيصال', thDate: 'التاريخ', noDonationFound: 'لا توجد تبرعات.',
+                settingsTitle: 'الإعدادات', changePassword: 'تغيير كلمة المرور', currentPassword: 'كلمة المرور الحالية', newPassword: 'كلمة المرور الجديدة', changePasswordBtn: 'تغيير كلمة المرور', passwordSuccess: 'تم تغيير كلمة المرور بنجاح!', passwordError: 'كلمة المرور الحالية غير صحيحة!',
+                theme: 'المظهر', selectTheme: 'اختر مظهر التطبيق', lightMode: 'الوضع الفاتح', darkMode: 'الوضع الداكن',
+                language: 'اللغة', selectLanguage: 'اختر لغة التطبيق', settingsInfoText: 'يمكنك تغيير كل شيء بالذهاب إلى إعدادات التطبيق، مثل التشغيل في الوضع الداكن أو الفاتح، وتغيير لغة التطبيق، مثل الإنجليزية والبنغالية والعربية.',
+                // Modal specific
+                addNewStudentTitle: 'إضافة طالب جديد', updateStudentTitle: 'تحديث بيانات الطالب', studentNameLabel: 'اسم الطالب', imageUrlLabel: 'رابط الصورة', fatherNameLabel: 'اسم الأب', motherNameLabel: 'اسم الأم', addressLabel: 'العنوان', departmentLabel: 'القسم', rollLabel: 'رقم اللفة', monthlyFeeLabel: 'الرسوم الشهرية', residenceTypeLabel: 'نوع الإقامة', residenceResidential: 'سكني', residenceNonResidential: 'غير سكني', residenceDayCare: 'رعاية نهارية', lillahBoardingLabel: 'سكن لله', no: 'لا', yes: 'نعم', saveBtn: 'حفظ',
+                addNewDonationTitle: 'إضافة تبرع جديد', updateDonationTitle: 'تحديث بيانات التبرع', donorNameLabel: 'اسم المتبرع', donationAmountLabel: 'مبلغ التبرع', donationTypeLabel: 'نوع التبرع', donationTypePlaceholder: 'مثال: عام، زكاة', receiverBookLabel: 'اسم دفتر المستلم', receiptNoLabel: 'رقم الإيصال',
+            }
+        };
+
+        let currentLang = 'bn';
+
+        // ===================================
+        // DATABASE & STATE MANAGEMENT
+        // ===================================
+        const db = {
+            getItem: (key) => localStorage.getItem(key),
+            setItem: (key, value) => localStorage.setItem(key, value),
+            getJSON: (key, defaultValue = []) => {
+                try {
+                    const item = localStorage.getItem(key);
+                    return item ? JSON.parse(item) : defaultValue;
+                } catch (e) {
+                    return defaultValue;
+                }
+            },
+            setJSON: (key, value) => {
+                try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { console.error(e); }
+            }
+        };
+
+        let state = { students: [], donations: [], expenses: [], feePayments: {} };
+
+        function loadInitialData() {
+            state.students = db.getJSON('students', []);
+            state.donations = db.getJSON('donations', []);
+            state.expenses = db.getJSON('expenses', []);
+            state.feePayments = db.getJSON('feePayments', {});
+            recalculateStudentSerials();
+        }
+
+        function saveData() {
+            db.setJSON('students', state.students);
+            db.setJSON('donations', state.donations);
+            db.setJSON('expenses', state.expenses);
+            db.setJSON('feePayments', state.feePayments);
+            updateDashboard();
+        }
+        
+        // ===================================
+        // INITIALIZATION & LOGIN
+        // ===================================
+        const loginScreen = document.getElementById('login-screen');
+        const appContainer = document.getElementById('app-container');
+
+        function initialize() {
+            if (!db.getItem('appPassword')) db.setItem('appPassword', '1357');
+            if (sessionStorage.getItem('isLoggedIn') === 'true') showApp();
+            
+            const savedTheme = db.getItem('theme') || 'light';
+            const savedLang = db.getItem('language') || 'bn';
+            
+            applyTheme(savedTheme, false);
+            applyLanguage(savedLang, false);
+            
+            loadInitialData();
+            renderAll();
+            setupEventListeners();
+        }
+
+        function showApp() {
+            loginScreen.classList.add('hidden');
+            appContainer.style.visibility = 'visible';
+        }
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (document.getElementById('password').value === db.getItem('appPassword')) {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                showApp();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        });
+
+        // ===================================
+        // SPA NAVIGATION
+        // ===================================
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.app-section');
+
+        navLinks.forEach(link => link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = e.currentTarget.getAttribute('href').substring(1);
+            sections.forEach(s => s.classList.toggle('active', s.id === targetId));
+            navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${targetId}`));
+        }));
+
+
+        // ===================================
+        // DASHBOARD
+        // ===================================
+        function updateDashboard() {
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+
+            const totalFeeIncome = Object.values(state.feePayments).flat().reduce((sum, p) => sum + p.amount, 0);
+            const totalDonationIncome = state.donations.reduce((sum, d) => sum + d.amount, 0);
+            const totalIncome = totalFeeIncome + totalDonationIncome;
+            
+            const monthlyFeeIncome = Object.values(state.feePayments).flat().filter(p => new Date(p.date).getMonth() === currentMonth && new Date(p.date).getFullYear() === currentYear).reduce((sum, p) => sum + p.amount, 0);
+            const monthlyDonationIncome = state.donations.filter(d => new Date(d.date).getMonth() === currentMonth && new Date(d.date).getFullYear() === currentYear).reduce((sum, d) => sum + d.amount, 0);
+            const monthlyIncome = monthlyFeeIncome + monthlyDonationIncome;
+            
+            const yearlyFeeIncome = Object.values(state.feePayments).flat().filter(p => new Date(p.date).getFullYear() === currentYear).reduce((sum, p) => sum + p.amount, 0);
+            const yearlyDonationIncome = state.donations.filter(d => new Date(d.date).getFullYear() === currentYear).reduce((sum, d) => sum + d.amount, 0);
+            const yearlyIncome = yearlyFeeIncome + yearlyDonationIncome;
+
+            const totalExpense = state.expenses.reduce((sum, e) => sum + e.amount, 0);
+            const cashBalance = totalIncome - totalExpense; // NEW CALCULATION
+
+            // Update UI
+            const formatCurrency = (val) => `৳${val.toLocaleString('en-IN')}`;
+            document.getElementById('total-income').textContent = formatCurrency(totalIncome);
+            document.getElementById('total-expense').textContent = formatCurrency(totalExpense);
+            document.getElementById('cash-balance').textContent = formatCurrency(cashBalance); // UPDATE UI
+            document.getElementById('monthly-income').textContent = formatCurrency(monthlyIncome);
+            document.getElementById('yearly-income').textContent = formatCurrency(yearlyIncome);
+            document.getElementById('total-students').textContent = state.students.length;
+            document.getElementById('lillah-students').textContent = state.students.filter(s => s.lillahBoarding === 'Yes').length;
+        }
+
+        // ===================================
+        // STUDENTS MANAGEMENT
+        // ===================================
+        const studentModal = document.getElementById('student-modal');
+        const studentForm = document.getElementById('student-form');
+        const studentsTableBody = document.querySelector('#students-table tbody');
+        const DEFAULT_IMAGE = 'https://i.ibb.co/7j1j6bM/default-avatar.png';
+
+        function recalculateStudentSerials() { state.students.forEach((s, i) => s.serial = i + 1); }
+
+        function renderStudents() {
+            studentsTableBody.innerHTML = '';
+            if (state.students.length === 0) {
+                studentsTableBody.innerHTML = `<tr><td colspan="8" class="text-center" data-translate-key="noStudentFound">${translations[currentLang].noStudentFound}</td></tr>`;
+                return;
+            }
+            state.students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.serial}</td>
+                    <td><img src="${student.imageUrl || DEFAULT_IMAGE}" class="student-image-sm" onerror="this.onerror=null;this.src='${DEFAULT_IMAGE}'"></td>
+                    <td>${student.name}</td>
+                    <td>${student.fatherName}</td>
+                    <td>${student.department}</td>
+                    <td>${student.roll}</td>
+                    <td>${student.residenceType}</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-secondary" onclick="editStudent(${student.serial})">${translations[currentLang].editBtn}</button>
+                        <button class="btn btn-danger" onclick="deleteStudent(${student.serial})">${translations[currentLang].deleteBtn}</button>
+                    </td>
+                `;
+                studentsTableBody.appendChild(row);
+            });
+        }
+
+        function openStudentModal(mode, studentData = null) {
+            studentForm.reset();
+            document.getElementById('student-id').value = '';
+            const modalTitle = document.getElementById('student-modal-title');
+            
+            if (mode === 'add') {
+                modalTitle.textContent = translations[currentLang].addNewStudentTitle;
+            } else if (mode === 'edit' && studentData) {
+                modalTitle.textContent = translations[currentLang].updateStudentTitle;
+                Object.keys(studentData).forEach(key => {
+                    const element = document.getElementById(key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`));
+                    if (element) element.value = studentData[key];
+                });
+                document.getElementById('student-id').value = studentData.serial;
+                document.getElementById('student-image-url').value = studentData.imageUrl;
+            }
+            studentModal.style.display = 'flex';
+        }
+
+        studentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const studentId = document.getElementById('student-id').value;
+            const studentData = {
+                name: document.getElementById('student-name').value, imageUrl: document.getElementById('student-image-url').value, fatherName: document.getElementById('father-name').value, motherName: document.getElementById('mother-name').value, address: document.getElementById('address').value,
+                department: document.getElementById('department').value, roll: parseInt(document.getElementById('roll').value), monthlyFee: parseFloat(document.getElementById('monthly-fee').value), residenceType: document.getElementById('residence-type').value, lillahBoarding: document.getElementById('lillah-boarding').value,
+            };
+
+            if (studentId) {
+                const index = state.students.findIndex(s => s.serial == studentId);
+                if (index !== -1) state.students[index] = { ...state.students[index], ...studentData };
+            } else {
+                studentData.serial = state.students.length > 0 ? Math.max(...state.students.map(s => s.serial)) + 1 : 1;
+                state.students.push(studentData);
+            }
+            recalculateStudentSerials(); saveData(); renderStudents(); studentModal.style.display = 'none';
+        });
+
+        window.editStudent = (serial) => openStudentModal('edit', state.students.find(s => s.serial === serial));
+        window.deleteStudent = (serial) => {
+            if (confirm(`Are you sure you want to delete student #${serial}?`)) {
+                state.students = state.students.filter(s => s.serial !== serial);
+                recalculateStudentSerials(); saveData(); renderStudents();
+            }
+        };
+        
+        // Student Search
+        const searchStudentInput = document.getElementById('search-student-serial');
+        const searchResultDiv = document.getElementById('student-search-result');
+        searchStudentInput.addEventListener('input', (e) => {
+            const serial = parseInt(e.target.value);
+            searchResultDiv.innerHTML = '';
+            if (!serial) return;
+            
+            const student = state.students.find(s => s.serial === serial);
+            if (student) {
+                searchResultDiv.innerHTML = `
+                    <div class="card mt-2 student-search-card">
+                        <img src="${student.imageUrl || DEFAULT_IMAGE}" class="student-image-lg" onerror="this.onerror=null;this.src='${DEFAULT_IMAGE}'">
+                        <div>
+                            <h4>${student.name} (Serial: ${student.serial})</h4>
+                            <p><strong>${translations[currentLang].fatherNameLabel}:</strong> ${student.fatherName}</p>
+                            <p><strong>${translations[currentLang].departmentLabel}:</strong> ${student.department}, <strong>${translations[currentLang].rollLabel}:</strong> ${student.roll}</p>
+                            <p><strong>${translations[currentLang].monthlyFeeLabel}:</strong> ৳${student.monthlyFee}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                searchResultDiv.innerHTML = `<p class="mt-2" data-translate-key="studentNotFoundWithSerial">${translations[currentLang].studentNotFoundWithSerial}</p>`;
+            }
+        });
+
+
+        // ===================================
+        // STUDENT MONTHLY FEE (NO DUE)
+        // ===================================
+        const feeStudentSearch = document.getElementById('fee-student-search');
+        let currentFeeStudentSerial = null;
+
+        feeStudentSearch.addEventListener('input', (e) => {
+            const serial = parseInt(e.target.value);
+            currentFeeStudentSerial = null;
+            document.getElementById('fee-student-info').style.display = 'none';
+            document.getElementById('fee-payment-history').innerHTML = '';
+            if (!serial) return;
+
+            const student = state.students.find(s => s.serial === serial);
+            if (student) {
+                currentFeeStudentSerial = student.serial;
+                document.getElementById('fee-student-name').textContent = `${translations[currentLang].studentNameLabel}: ${student.name}`;
+                document.getElementById('fee-father-name').textContent = student.fatherName;
+                document.getElementById('fee-monthly-amount').textContent = `৳${student.monthlyFee}`;
+                document.getElementById('fee-student-info').style.display = 'block';
+                document.getElementById('fee-month').valueAsDate = new Date();
+                renderFeeHistory(student.serial);
+            }
+        });
+
+        function renderFeeHistory(serial) {
+            const historyDiv = document.getElementById('fee-payment-history');
+            const payments = state.feePayments[serial] || [];
+            
+            historyDiv.innerHTML = `<h4 data-translate-key="paymentHistory">${translations[currentLang].paymentHistory}</h4>`;
+            if (payments.length === 0) {
+                historyDiv.innerHTML += `<p data-translate-key="noPaymentFound">${translations[currentLang].noPaymentFound}</p>`;
+                return;
+            }
+            const table = document.createElement('table');
+            table.className = 'w-100 mt-1';
+            table.innerHTML = `
+                <thead><tr><th>${translations[currentLang].selectMonth}</th><th>${translations[currentLang].thAmount}</th><th>${translations[currentLang].thDate}</th></tr></thead>
+                <tbody>
+                    ${payments.map(p => `<tr><td>${p.month}</td><td>৳${p.amount}</td><td>${new Date(p.date).toLocaleDateString('bn-BD')}</td></tr>`).join('')}
+                </tbody>`;
+            historyDiv.appendChild(table);
+        }
+
+        document.getElementById('save-fee-payment').addEventListener('click', () => {
+            if (!currentFeeStudentSerial) return;
+            const month = document.getElementById('fee-month').value;
+            const amount = parseFloat(document.getElementById('fee-paid-amount').value);
+            if (!month || isNaN(amount) || amount <= 0) return alert('Please enter a valid month and amount.');
+
+            if (!state.feePayments[currentFeeStudentSerial]) state.feePayments[currentFeeStudentSerial] = [];
+            state.feePayments[currentFeeStudentSerial].push({ month, amount, date: new Date().toISOString() });
+
+            saveData();
+            renderFeeHistory(currentFeeStudentSerial);
+            document.getElementById('fee-paid-amount').value = '';
+            alert('Payment saved successfully!');
+        });
+
+        // ===================================
+        // EXPENSES & DONATIONS
+        // (Logic is largely unchanged, just need translation on render)
+        // ===================================
+        const expensesTableBody = document.querySelector('#expenses-table tbody');
+        const donationsTableBody = document.querySelector('#donations-table tbody');
+
+        function renderExpenses() {
+            expensesTableBody.innerHTML = '';
+            if (state.expenses.length === 0) {
+                expensesTableBody.innerHTML = `<tr><td colspan="4" class="text-center">${translations[currentLang].noExpenseFound}</td></tr>`; return;
+            }
+            [...state.expenses].sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(expense => {
+                expensesTableBody.innerHTML += `<tr><td>${new Date(expense.date).toLocaleDateString('bn-BD')}</td><td>${expense.description}</td><td>৳${expense.amount}</td>
+                    <td class="action-buttons"><button class="btn btn-danger" onclick="deleteExpense('${expense.id}')">${translations[currentLang].deleteBtn}</button></td></tr>`;
+            });
+        }
+        document.getElementById('expense-form').addEventListener('submit', e => {
+            e.preventDefault();
+            state.expenses.push({ id: `exp_${Date.now()}`, date: document.getElementById('expense-date').value, amount: parseFloat(document.getElementById('expense-amount').value), description: document.getElementById('expense-description').value });
+            saveData(); renderExpenses(); e.target.reset();
+        });
+        window.deleteExpense = (id) => { if (confirm('Delete this expense?')) { state.expenses = state.expenses.filter(e => e.id !== id); saveData(); renderExpenses(); }};
+
+        function renderDonations() {
+            donationsTableBody.innerHTML = '';
+            if (state.donations.length === 0) {
+                donationsTableBody.innerHTML = `<tr><td colspan="6" class="text-center">${translations[currentLang].noDonationFound}</td></tr>`; return;
+            }
+            [...state.donations].sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(d => {
+                donationsTableBody.innerHTML += `<tr><td>${new Date(d.date).toLocaleDateString('bn-BD')}</td><td>${d.donorName}</td><td>৳${d.amount}</td><td>${d.type}</td><td>${d.receiptNumber}</td>
+                    <td class="action-buttons"><button class="btn btn-secondary" onclick="editDonation('${d.id}')">${translations[currentLang].editBtn}</button><button class="btn btn-danger" onclick="deleteDonation('${d.id}')">${translations[currentLang].deleteBtn}</button></td></tr>`;
+            });
+        }
+        document.getElementById('donation-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const id = document.getElementById('donation-id').value;
+            const data = { donorName: document.getElementById('donor-name').value, amount: parseFloat(document.getElementById('donation-amount').value), type: document.getElementById('donation-type').value, receiverBook: document.getElementById('receiver-book').value, receiptNumber: document.getElementById('receipt-number').value };
+            if (id) {
+                const index = state.donations.findIndex(d => d.id === id);
+                if (index !== -1) state.donations[index] = { ...state.donations[index], ...data };
+            } else {
+                state.donations.push({ ...data, id: `don_${Date.now()}`, date: new Date().toISOString() });
+            }
+            saveData(); renderDonations(); document.getElementById('donation-modal').style.display = 'none';
+        });
+        const openDonationModal = (mode, data = null) => {
+            document.getElementById('donation-form').reset(); document.getElementById('donation-id').value = '';
+            document.getElementById('donation-modal-title').textContent = mode === 'add' ? translations[currentLang].addNewDonationTitle : translations[currentLang].updateDonationTitle;
+            if (mode === 'edit' && data) {
+                Object.keys(data).forEach(key => { const el = document.getElementById(key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)); if (el) el.value = data[key]; });
+                document.getElementById('donation-id').value = data.id;
+            }
+            document.getElementById('donation-modal').style.display = 'flex';
+        }
+        window.editDonation = (id) => openDonationModal('edit', state.donations.find(d => d.id === id));
+        window.deleteDonation = (id) => { if (confirm('Delete this donation?')) { state.donations = state.donations.filter(d => d.id !== id); saveData(); renderDonations(); }};
+
+        // ===================================
+        // SETTINGS & LANGUAGE
+        // ===================================
+        function translateUI(lang) {
+            const elements = document.querySelectorAll('[data-translate-key]');
+            elements.forEach(el => {
+                const key = el.dataset.translateKey;
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+            const placeholders = document.querySelectorAll('[data-translate-key-placeholder]');
+            placeholders.forEach(el => {
+                const key = el.dataset.translateKeyPlaceholder;
+                 if (translations[lang] && translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+        }
+
+        function applyLanguage(lang, rerender = true) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.body.classList.toggle('rtl', lang === 'ar');
+            document.getElementById('language-selector').value = lang;
+            db.setItem('language', lang);
+            translateUI(lang);
+            if (rerender) renderAll(); // Rerender tables to update button texts etc.
+        }
+        
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            document.getElementById('theme-selector').value = theme;
+            db.setItem('theme', theme);
+        }
+        
+        document.getElementById('change-password-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const current = document.getElementById('current-password').value, newP = document.getElementById('new-password').value, status = document.getElementById('password-change-status');
+            if (current === db.getItem('appPassword')) {
+                db.setItem('appPassword', newP);
+                status.textContent = translations[currentLang].passwordSuccess; status.style.color = 'var(--success-color)';
+            } else {
+                status.textContent = translations[currentLang].passwordError; status.style.color = 'var(--error-color)';
+            }
+        });
+
+        // ===================================
+        // EVENT LISTENERS & INITIALIZATION
+        // ===================================
+        function setupEventListeners() {
+            document.getElementById('add-student-btn').addEventListener('click', () => openStudentModal('add'));
+            document.getElementById('add-donation-btn').addEventListener('click', () => openDonationModal('add'));
+            document.getElementById('theme-selector').addEventListener('change', (e) => applyTheme(e.target.value));
+            document.getElementById('language-selector').addEventListener('change', (e) => applyLanguage(e.target.value));
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.querySelector('.close-button').onclick = () => modal.style.display = 'none';
+                window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
+            });
+        }
+        
+        function renderAll() {
+            renderStudents();
+            renderDonations();
+            renderExpenses();
+            updateDashboard();
+        }
+
+        initialize();
+    };
+    </script>
+</body>
+</html>
